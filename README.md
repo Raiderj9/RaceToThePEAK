@@ -10,7 +10,7 @@ through climbing prowess, or resort to sabotage to be the fastest up the PEAK.
 
 ## Features
 - Troops. Race as a team or alone in 1 of 12 troops.
-- Armbands. Rep your troop with this extra bit of swag
+- Armbands. Rep your troop with this extra bit of swag.
 - Climb Timer. Track your progress up to the PEAK.
 - Leaderboard. See how you stack up compared to the other troops.
 
@@ -25,8 +25,7 @@ Things to be aware of while using this mod:
 This mod can be used standalone, but I intended for it to be played using:
 [PEAK Unlimited](https://thunderstore.io/c/peak/p/glarmer/PEAK_Unlimited/) 
 
-This mod is also in active development, feel free to reach out to me if you encounter bugs, issues, or would like to help <br>
-with development.
+This mod is also in active development, feel free to reach out to me if you encounter bugs, issues, or would like to help with development.
 
 ## Planned
 - Add Localized Text.
