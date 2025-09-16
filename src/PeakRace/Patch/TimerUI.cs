@@ -180,8 +180,6 @@ public class TimerUI : MonoBehaviour
             }
         }
 
-        //Debug.Log($"teamTracker Counter:{teamTracker.Count}");
-
         //Loop through teamTracker to calculate total team scores
         List<(int team, float time)> teamTimer = new List<(int, float)>();
         foreach (KeyValuePair <int, List<CharacterTeamInfo>> team in teamTracker)
@@ -191,7 +189,6 @@ public class TimerUI : MonoBehaviour
             {
                 timer += teamHandler.time;
             }
-            //Debug.Log($"team:{team.Key}\ntime:{timer / team.Value.Count}");
             teamTimer.Add((team.Key, timer / team.Value.Count));
         }
         //Add debug teams here

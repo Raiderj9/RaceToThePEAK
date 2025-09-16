@@ -37,10 +37,7 @@ internal class Armband : MonoBehaviour
 
         teamInt = TeamHandler.getPlayerTeam(myChar.name);
 
-        Debug.Log($"[RaceToThePeak] Loading Rigid Components");
         Rigidbody arm  = myChar.GetBodypartRig(BodypartType.Arm_L);
-
-        Debug.Log($"[RaceToThePeak] Finished Loading Assets");
 
         //Spawns Armband
         //Local Position: -0.0276 0.4798 0.0064
@@ -55,11 +52,9 @@ internal class Armband : MonoBehaviour
         renderer = myArmband.GetComponent<Renderer>();
         renderer.material = TeamHandler.TroopMat[teamInt];
 
-        Debug.Log($"[RaceToThePeak] Finished Load Step");
+        Debug.Log($"[RaceToThePeak] Finished Armband Load Step");
 
         myChar.GetComponent<CharacterTeamInfo>().InitializeTeam();
-
-        Debug.Log($"[RaceToThePeak] Initialized Team");
     }
 
     [HarmonyPatch(typeof(HideTheBody), nameof(HideTheBody.Toggle))]
@@ -76,12 +71,10 @@ internal class Armband : MonoBehaviour
         if (show)
         {
             __instance.SetShowing(armRender, 0f);
-            Debug.Log($"[RaceToThePeak] Set armband Show");
         }
         else
         {
             __instance.SetShowing(armRender, 1f);
-            Debug.Log($"[RaceToThePeak] Set armband Hide");
         }
     }
 

@@ -34,7 +34,7 @@ internal class CharacterTeamInfo : MonoBehaviourPunCallbacks
     static void PosPatch(Character __instance)
     {
         __instance.gameObject.AddComponent<CharacterTeamInfo>();
-        //Debug.Log($"[RaceToThePeak] TeamInfo Object Created for {__instance.name}");
+        Debug.Log($"[RaceToThePeak] TeamInfo Object Created for {__instance.name}");
     }
 
     // Adds 5 minutes to player death timer
@@ -77,8 +77,6 @@ internal class CharacterTeamInfo : MonoBehaviourPunCallbacks
         {
             return;
         }
-
-        //Debug.Log("[RaceToThePeak] Loading Team Info");
 
         teamOn = true;
         teamGUIOn = true;
@@ -202,7 +200,6 @@ internal class CharacterTeamInfo : MonoBehaviourPunCallbacks
         int idx = 0;
         foreach (Campfire campfire in campfireList)
         {
-            //Debug.Log($"[RaceToThePeak] checking campfire:{campfire.name}");
             if (Vector3.Distance(campfire.transform.position, myChar.Center) <= checkpointRadius)
             {
                 campfireList.RemoveAt(idx);

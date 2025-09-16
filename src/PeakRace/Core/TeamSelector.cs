@@ -16,7 +16,6 @@ public class TeamSelector : MonoBehaviour, IInteractibleConstant, IInteractible
     //LocalizedText.GetText(teamName)
     void Awake()
     {
-        Debug.Log("[RaceToThePeak] Creating Team Selector ");
         mainRenderer = GetComponentInChildren<Renderer>();
         GameObject selector = this.gameObject;
         //Describe location

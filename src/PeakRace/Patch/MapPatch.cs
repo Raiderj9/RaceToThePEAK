@@ -55,8 +55,6 @@ internal class MapPatch
 
     //TODO Function to wait for all remaining players before ending game
 
-    //TODO disable respawn ability on statues if in teammode
-
     //TODO change list of survivors to winning team
 
     //TODO change game time to winning team time

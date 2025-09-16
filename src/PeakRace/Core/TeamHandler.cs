@@ -22,8 +22,6 @@ internal class TeamHandler
 
     public static void Initialize()
     {
-        Debug.Log("[RaceToThePeak] TeamHandler was started");
-
         charTeam = new List<(string charName, int team)>();
 
         Debug.Log($"[RaceToThePeak] Finished Loading Armband Assets");
@@ -87,10 +85,6 @@ internal class TeamHandler
             return;
         }
 
-        //foreach (string asset in assetBundle.GetAllAssetNames())
-        //{
-        //    Debug.Log($"[RaceToThePeak] found asset: {asset}");
-        //}
         baseArmband = assetBundle.LoadAsset<GameObject>("assets/bundledassets/racetothepeak/prefabs/armband.prefab");
         troopBaseMat = assetBundle.LoadAsset<Material>("assets/bundledassets/racetothepeak/mats/basearmband.mat");
         configureShader(troopBaseMat);
@@ -146,13 +140,13 @@ internal class TeamHandler
             if (shade.name == "W/Character")
             {
                 CharShader = shade;
-                Debug.Log("[RaceToThePeak] Successfully found W/Character");
+                Debug.Log("[RaceToThePeak] Successfully found W/Character shader");
 
                 setupArmbandPrefabs();
                 return;
             }
         }
 
-        Debug.Log("[RaceToThePeak] Could not find W/Character");
+        Debug.Log("[RaceToThePeak] Could not find W/Character shader");
     }
 }
