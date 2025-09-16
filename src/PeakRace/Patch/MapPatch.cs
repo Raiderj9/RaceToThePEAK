@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using UnityEngine;
@@ -37,16 +38,10 @@ internal class MapPatch
 
     //Functions to force only Items to spawn
     [HarmonyPatch(typeof(RespawnChest), nameof(RespawnChest.SpawnItems))]
-    [HarmonyPostfix]
     static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
     {
-        Debug.Log("[RaceToThePeak] Rewriting Respawn Statue");
-        var codes = new List<CodeInstruction>(instructions);
+        List <CodeInstruction> codes = instructions.ToList();
 
-        foreach (var code in codes)
-        {
-            Debug.Log("[RaceToThePeak] found Instruction: " + code.ToString());
-        }
         // We want to remove the lines of code from SpawnItems that respawns players so we can add it to Campfires later
         // This isnt really clear, and mostly hardcoded... Whoopsie 0_0
 

@@ -5,9 +5,9 @@ schemaVersion = "0.0.2"
 repository = "https://thunderstore.io"
 
 [package]
-namespace = "TODO: Fill in your Thunderstore team name here"
+namespace = "Raiderj9"
 name = "RaceToThePeak"
-description = "TODO: Fill in short mod description."
+description = "Adds teams and racing to PEAK"
 websiteUrl = "" # TODO: Add a link to your mod repository here (optional)
 containsNsfwContent = false
 
@@ -20,7 +20,7 @@ readme = "../../README.md"
 outdir = "../../artifacts/thunderstore/"
 
 [[build.copy]]
-source = "../../artifacts/bin/PeakRace/release/c9d581b4-6e74-444e-afa0-dbe7f4726bbf.dll"
+source = "../../artifacts/bin/PeakRace/release/RaceToThePeak.dll"
 target = "plugins/"
 
 [[build.copy]]
