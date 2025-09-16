@@ -26,6 +26,7 @@ internal class CharacterTeamInfo : MonoBehaviourPunCallbacks
     public string timeString;
     public float checkpointRadius;
     private GameObject GameMap;
+    private GameObject EndFlag;
     private List<Campfire> campfireList;
     public Character myChar;
 
@@ -105,6 +106,7 @@ internal class CharacterTeamInfo : MonoBehaviourPunCallbacks
             campfireList = GameMap.GetComponentsInChildren<Campfire>(true).Cast<Campfire>().ToList();
             //Removes spawn campfire
             campfireList.RemoveAt(0);
+            EndFlag = GameObject.Find("Map/Biome_4/Volcano/Peak/Flag_planted_seagull");
         }
 
         //Debug.Log("[RaceToThePeak] TeamInfo Initialized");
@@ -197,6 +199,7 @@ internal class CharacterTeamInfo : MonoBehaviourPunCallbacks
 
     private void checkpointHandler()
     {
+        // Checks if in range of one of the campfires
         int idx = 0;
         foreach (Campfire campfire in campfireList)
         {
@@ -210,6 +213,14 @@ internal class CharacterTeamInfo : MonoBehaviourPunCallbacks
                 return;
             }
             idx++;
+        }
+
+        // Checks if in range of the end flag
+        if (Vector3.Distance(EndFlag.transform.position, myChar.Center) <= checkpointRadius)
+        {
+            timeOn = false;
+            Debug.Log($"[RaceToThePeak] Timer was turned off for {myChar.name} due to reaching the PEAK");
+            return;
         }
     }
 
