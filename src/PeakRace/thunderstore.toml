@@ -8,7 +8,7 @@ repository = "https://thunderstore.io"
 namespace = "Raiderj9"
 name = "RaceToThePeak"
 description = "Adds teams and racing to PEAK"
-websiteUrl = "" # TODO: Add a link to your mod repository here (optional)
+websiteUrl = "https://github.com/Raiderj9/RaceToThePEAK"
 containsNsfwContent = false
 
 [package.dependencies]
