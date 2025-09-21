@@ -37,7 +37,7 @@ public partial class Plugin : BaseUnityPlugin
             ("Troop Cheetah"    ,new Color(1f, 1f, 0f, 1f)),
             ("Troop Lovebird"   ,new Color(1f, 0.5f, 1f, 1f)),
             ("Troop Narwhal"    ,new Color(.25f, .5f, 1f, 1f)),
-            ("Troop AntEater"   ,new Color(0.3f, 0.82f, 0.28f, 1)),
+            ("Troop AntEater"   ,new Color(0.3f, 0.82f, 0.28f, 1f)),
             ("Troop Condor"     ,new Color(0.36f, 1f, 1f, 1)),
             ("Troop Crab"       ,new Color(1f, 0.24f, 0.28f, 1f)),
             ("Troop Salamander" ,new Color(0.9f, 0.29f, 1f, 1f)),

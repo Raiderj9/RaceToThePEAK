@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using pworld.Scripts.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -192,11 +193,11 @@ public class TimerUI : MonoBehaviour
             teamTimer.Add((team.Key, timer / team.Value.Count));
         }
         //Add debug teams here
-        //teamTimer.Add((0, 10));
+        //teamTimer.Add((0, 38.5f));
         //teamTimer.Add((1, 15));
-        //teamTimer.Add((2, 20));
+        //teamTimer.Add((2, 28.7f));
         //teamTimer.Add((3, 30));
-        //teamTimer.Add((4, 45));
+        //teamTimer.Add((4, 26.0f));
         //teamTimer.Add((5, 60));
 
         // Determines teams placement
@@ -222,33 +223,41 @@ public class TimerUI : MonoBehaviour
         string[] teams = ["","","","",""];
         if(yourPlace<5)
         {
-            teams[0] = "1st " + timeToString(trophyPlaces[0].time);
+            teams[0] = colorizeLeaderboard("1st", trophyPlaces[0].time, Plugin.teamList[trophyPlaces[0].team].Item2 );
             if (trophyPlaces[1].time > 0)
-                { teams[1] = "\n2nd " + timeToString(trophyPlaces[1].time); }
+                { teams[1] = colorizeLeaderboard("\n2nd", trophyPlaces[1].time, Plugin.teamList[trophyPlaces[1].team].Item2 ); }
             if (trophyPlaces[2].time > 0)
-                { teams[2] = "\n3rd " + timeToString(trophyPlaces[2].time); }
+                { teams[2] = colorizeLeaderboard("\n3rd", trophyPlaces[2].time, Plugin.teamList[trophyPlaces[2].team].Item2 ); }
             if (trophyPlaces[3].time > 0)
-                { teams[3] = "\n4th " + timeToString(trophyPlaces[3].time); }
+                { teams[3] = colorizeLeaderboard("\n4th", trophyPlaces[3].time, Plugin.teamList[trophyPlaces[3].team].Item2 ); }
             if (trophyPlaces[4].time > 0)
-                { teams[4] = "\n5th " + timeToString(trophyPlaces[4].time); }
+                { teams[4] = colorizeLeaderboard("\n5th", trophyPlaces[4].time, Plugin.teamList[trophyPlaces[4].team].Item2 ); }
 
             teams[yourPlace] += " (You)";
             //Here is where we would calculate team color on leaderboard
             leaderboard.text = teams[0]+teams[1]+teams[2]+teams[3]+teams[4];
         }
-        // Otherwise break after 3 and write player position
+        // Otherwise break after 2 and write player position
         else
         {
-            teams[0] = "1st " + timeToString(trophyPlaces[0].time);
-            teams[1] = "\n2nd " + timeToString(trophyPlaces[1].time);
-            teams[2] = "\n3rd " + timeToString(trophyPlaces[2].time);
-            teams[3] = "\n- - - - - - - - - -";
-            teams[4] = "\n"+ (yourPlace+1) + "th " + timeToString(trophyPlaces[yourPlace].time) + " (You)";
+            teams[0] = colorizeLeaderboard("1st", trophyPlaces[0].time, Plugin.teamList[trophyPlaces[0].team].Item2 );
+            teams[1] = colorizeLeaderboard("\n2nd", trophyPlaces[1].time, Plugin.teamList[trophyPlaces[1].team].Item2 );
+            teams[2] = "\n- - - - - - - - - -";
+            teams[3] = colorizeLeaderboard($"\n{yourPlace}th", trophyPlaces[yourPlace-1].time, Plugin.teamList[trophyPlaces[yourPlace-1].team].Item2);
+            teams[4] = colorizeLeaderboard($"\n{yourPlace + 1}th", trophyPlaces[yourPlace].time, Plugin.teamList[trophyPlaces[yourPlace].team].Item2) + " (You)";
 
             //Here is where we would calculate team color on leaderboard
             leaderboard.text = teams[0] + teams[1] + teams[2] + teams[3] + teams[4];
         }
 
+    }
+
+    //Colorize Leaderboard
+    private string colorizeLeaderboard(string place, float time, UnityEngine.Color color)
+    {
+        string colorText = ColorUtility.ToHtmlStringRGBA(color);
+        string boardText = $"<color=#{colorText}>{place} {timeToString(time)}</color>";
+        return boardText;
     }
 
     // Calculates the next pole position
