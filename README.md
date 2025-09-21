@@ -1,7 +1,6 @@
 # Race To The PEAK
 Ever find yourself racing to get to the top? Looking for a reason to sabotage your friends? This mod aims to facilitate just that!
-
-![image](https://github.com/Raiderj9/RaceToThePEAK/blob/master/Pictures/ScoutWithArmband.png)
+![image](https://raw.githubusercontent.com/Raiderj9/RaceToThePEAK/refs/heads/master/Pictures/Leaderboard.png)
 
 This mod introduces Troops (Teams) that players can join to team up as they race to the PEAK. Will you beat the other troops <br>
 through climbing prowess, or resort to sabotage to be the fastest up the PEAK.
@@ -44,4 +43,6 @@ This mod is also in active development, feel free to reach out to me if you enco
 ## Images
 here are some other images
 
-![image](https://github.com/Raiderj9/RaceToThePEAK/blob/master/Pictures/TroopArmbands.png)
+![image](https://raw.githubusercontent.com/Raiderj9/RaceToThePEAK/refs/heads/master/Pictures/TroopArmbands.png)
+
+![image](https://raw.githubusercontent.com/Raiderj9/RaceToThePEAK/refs/heads/master/Pictures/ScoutWithArmband.png)
