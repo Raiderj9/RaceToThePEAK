@@ -24,7 +24,8 @@ Things to be aware of while using this mod:
 This mod can be used standalone, but I intended for it to be played using:
 [PEAK Unlimited](https://thunderstore.io/c/peak/p/glarmer/PEAK_Unlimited/) 
 
-This mod is also in active development, feel free to reach out to me if you encounter bugs, issues, or would like to help with development.
+This mod is also in active development. If you encounter bugs, issues, or would like to help with development. You can find me on<br>
+ the Peak Discord Modding server or leaving an issue on github.
 
 ## Planned
 - Add Localized Text.
@@ -32,11 +33,10 @@ This mod is also in active development, feel free to reach out to me if you enco
 - Add a table/desk/stand for armband selection.
 - Add a toggle to turn team mode off or on from in lobby.
 - Find a better way to handle or manage game shaders.
-- Color or denote troop on scoreboard.
 - Wait for all remaining players before ending game.
 - Change survivors on helicoptor to winning team.
 - Change game time to winning team time.
-- ensure respawn totem respawns someone from the users team.
+- ensure respawn totem respawns someone from the users troop.
 - Options Menu.
 
 
