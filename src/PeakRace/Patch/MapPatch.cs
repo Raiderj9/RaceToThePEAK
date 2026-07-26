@@ -16,14 +16,18 @@ internal class MapPatch
     //Function to restart everyones timers and respawn players
     [HarmonyPatch(typeof(Campfire), nameof(Campfire.Light_Rpc))]
     [HarmonyPostfix]
-    private static void restartTimer()
+    private static void restartTimer(Campfire __instance)
     {
+        Debug.Log($"[RaceToThePeak] Triggered by Campfire: {__instance}");
         //Finds all Characters
         foreach (Character allChar in Character.AllCharacters)
         {
-            Debug.Log("[RaceToThePeak] Timer was turned back on due to map transition");
-            CharacterTeamInfo TeamInfo = allChar.GetComponentInChildren<CharacterTeamInfo>();
-            TeamInfo.timeOn = true;
+            if (allChar.name != "Character(Clone)" ) // Quick fix to an issue I was having with clone character on game island launch
+            {
+                Debug.Log($"[RaceToThePeak] Timer for {allChar.name} was turned back on due to map transition");
+                CharacterTeamInfo TeamInfo = allChar.GetComponentInChildren<CharacterTeamInfo>();
+                TeamInfo.timeOn = true;
+            }
         }
     }
 

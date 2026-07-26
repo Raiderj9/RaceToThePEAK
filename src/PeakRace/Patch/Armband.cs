@@ -15,18 +15,17 @@ internal class Armband : MonoBehaviour
 
 
     [HarmonyPatch(typeof(HideTheBody), nameof(HideTheBody.Start))]
-    [HarmonyPrefix]
+    [HarmonyPostfix]
     static void PosPatch(HideTheBody __instance)
     {
+
         // Loads Character shader
         if (TeamHandler.CharShader == null)
         {
             TeamHandler.findShader();
         }
-
         Character character = __instance.GetComponentInParent<Character>();
         character.gameObject.AddComponent<Armband>();
-
         Debug.Log($"[RaceToThePeak] Armband Created for {character.name}");
     }
 

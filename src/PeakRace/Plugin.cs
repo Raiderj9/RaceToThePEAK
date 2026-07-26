@@ -58,14 +58,13 @@ public partial class Plugin : BaseUnityPlugin
         harmony.PatchAll(typeof(CharacterTeamInfo));
         Log.LogInfo("Character Team Handler Successful");
 
-        //Map Patches
-        harmony.PatchAll(typeof(MapPatch));
-        Log.LogInfo("Map Patches Successful");
-
         //ArmBand
         harmony.PatchAll(typeof(Armband));
         Log.LogInfo("Armband Successful");
-
+        
+        //Map Patches
+        harmony.PatchAll(typeof(MapPatch));
+        Log.LogInfo("Map Patches Successful");
 
         Log.LogInfo($"Plugin {Name} is loaded!");
     }

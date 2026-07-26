@@ -24,7 +24,7 @@ internal class TeamHandler
     {
         charTeam = new List<(string charName, int team)>();
 
-        Debug.Log($"[RaceToThePeak] Finished Loading Armband Assets");
+        Debug.Log($"[RaceToThePeak] Finished Setting up TeamHandler");
 
     }
 
@@ -117,6 +117,7 @@ internal class TeamHandler
 
         path.Dispose();
         assetBundle.Unload(false);
+        Debug.Log($"[RaceToThePeak] Successfully Loaded Armband Resources");
     }
 
     static void configureShader(Material mat)

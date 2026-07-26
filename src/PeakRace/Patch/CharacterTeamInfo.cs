@@ -66,8 +66,8 @@ internal class CharacterTeamInfo : MonoBehaviourPunCallbacks
         {
             Campfire spawnCamp = teamHandler.campfireList[0];
             teamHandler.timeOn = false;
-            Debug.Log($"[RaceToThePeak] Respawning all players due to last climber dying");
-            respawnPlayers(spawnCamp);
+            //Debug.Log($"[RaceToThePeak] Respawning all players due to last climber dying");
+            //respawnPlayers(spawnCamp);
         }
     }
 
@@ -209,12 +209,12 @@ internal class CharacterTeamInfo : MonoBehaviourPunCallbacks
                 timeOn = false;
                 idx--;
                 Debug.Log($"[RaceToThePeak] Timer was turned off for {myChar.name} due to campfire");
-                respawnPlayers(campfire);
+    //            respawnPlayers(campfire);
                 return;
             }
             idx++;
         }
-
+    
         // Checks if in range of the end flag
         if (Vector3.Distance(EndFlag.transform.position, myChar.Center) <= checkpointRadius)
         {
@@ -224,38 +224,52 @@ internal class CharacterTeamInfo : MonoBehaviourPunCallbacks
         }
     }
 
+    [HarmonyPatch(typeof(Campfire), nameof(Campfire.Interact_CastFinished))]
+    [HarmonyPrefix]
+    private static void RespawnAll (Character interactor, Campfire __instance)
+    {
+        foreach (Character character in Character.AllCharacters)
+        {
+            if (character == interactor)
+            {
+                Debug.Log($"[RaceToThePeak] {character.name} is respawning all players at {__instance.advanceToSegment}");
+                respawnPlayers(__instance);
+            }
+        }
+    }
+
     // Checks if its time to respawn all players by the fire
     private static void respawnPlayers(Campfire campfire)
     {
-        bool allPlayersStopped = true;
-        int aliveCount = 0;
+        //Find the amount of dead players, so you know how much to space them
+        int deadCount = 0;
         foreach (Character character in Character.AllCharacters)
         {
-            if (!character.data.dead || !character.data.fullyPassedOut)
+            if (character.data.dead || character.data.fullyPassedOut)
             {
-                if(character.GetComponent<CharacterTeamInfo>().timeOn)
-                {
-                    allPlayersStopped = false; 
-                    break;
-                }
-                aliveCount++;
+ 
+                deadCount++;
             }
         }
 
-        // if all alive players made it to the top, respawn everyone
-        // dont want to respawn them if no one is alive, want to end game
-        if (allPlayersStopped && aliveCount > 0)
+        // Respawn equally spaced players
+        int playerIdx = 0;
+        foreach (Character character in Character.AllCharacters)
         {
-            foreach (Character character in Character.AllCharacters)
+            if (character.data.dead || character.data.fullyPassedOut)
             {
-                if (character.data.dead || character.data.fullyPassedOut)
-                {
-                    //respawn them around the campfire
-                    Vector3 adjustLocation = new Vector3(10f,0f,8f);
-                    character.photonView.RPC("RPCA_ReviveAtPosition", RpcTarget.All, campfire.transform.position + adjustLocation, true);
-                }
+                double angle = playerIdx * ( Math.PI / deadCount ) ;
+                double xAdj = Math.Sin(angle) *3;
+                double zAdj = Math.Cos(angle) *3;
+                Vector3 adjustLocation = new Vector3((float)xAdj, 5f, (float)xAdj);
+                //respawn them around the campfire
+                //character.GetComponent<CharacterTeamInfo>().campfireList.Remove(campfire);
+                //character.GetComponent<CharacterTeamInfo>().timeOn = false;
+                character.photonView.RPC("RPCA_ReviveAtPosition", RpcTarget.All, campfire.transform.position + adjustLocation, true);
+                playerIdx++;
             }
         }
+        //}
 
     }
 
