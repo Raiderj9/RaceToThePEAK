@@ -1,3 +1,40 @@
+### 0.10.0
+* Replaced PVP's selectable group waiting policy with mandatory personal campfire claims: every racer can activate immediately, but cannot cross until their own sequential claim succeeds.
+* Added one-slot, master-authoritative Campfire Ability inventory synchronized through Photon room properties; each new campfire roll replaces the previous main ability.
+* Added Adrenaline, Shield, Exhaust, Second Wind, Catch Up, Recall, Chaos Horn, Ghost Runner and reusable Mega Launch, with configurable activation keys and weighted rolls.
+* Added race-progress-aware targeting and catch-up scaling based on earned checkpoints plus normalized progress through the current segment.
+* Added a separate one-charge Chaos slot for the last racer at each campfire, with configurable Full Stamina, Infinite Stamina, Global Adrenaline, Global Unconscious, safe Player Swap, Previous Campfire and Middle Campfire effects.
+* Added hidden Mega Launch food to ordinary non-critical luggage food. Position-based chances are configurable from leader through far-behind, and the item remains visually indistinguishable until consumed.
+* Added synchronized ability HUD feedback, timed status effects, shield consumption, Mega Launch cooldown/countdown and short unconscious protection around launches.
+* Removed PVP next-campfire death respawning because it would bypass the dead racer's mandatory personal activation; legacy/configured values migrate to previous-campfire respawning.
+* Added all gameplay-affecting PVP ability, Chaos, Mega Launch and hidden-food tuning to the host lobby panel. The section exists only while PVP is selected, synchronizes through room properties and remains stable across host migration.
+* Changed the default PVP controls to F for the main ability and C for Chaos, including a one-time migration from the previous F4/F5 defaults.
+* Added embedded 256px icons for every Campfire Ability and Chaos, plus ready, passive and numeric cooldown HUD states with a visual recharge bar.
+* Reworked the ability HUD as a floating, cardless icon stack on the left-center of the screen. It avoids the teammate respawn timer and PEAK's stamina, status and inventory interface while retaining clear cooldown feedback.
+* Added one synchronized random starting ability for every racer in PVP, using the same configured weights as campfire rewards. Starting grants persist across host migration and do not include Chaos.
+* Added an optional PVP Test mode, disabled by default. Its host-only in-run controls can reroll every active player's main Ability or grant one Chaos charge to every active player without restarting the run.
+* Made Shield consume itself to protect its owner from Chaos Horn without removing their bonus stamina.
+* Reworked transition access so lagging clients keep PEAK's oversized future-biome seal open until they claim the previous fire. No custom world-sized collider is created; the master client now corrects an unclaimed racer immediately beyond PEAK's destination progress plane without blocking the campfire approach.
+* Fixed first-biome race scores so directed abilities such as Exhaust can identify racers ahead while the user is still on the beach.
+* Fixed Mega Launch for PEAK 2.0: its setting now represents target travel distance in metres. It uses the owner's camera direction, enters the game's cannon-style ragdoll state and assigns every owned body a gravity-compensated ballistic velocity instead of using PEAK's force buffer, which discards the requested force mode. Terrain and collisions can still shorten the flight.
+* Fixed hidden Mega Launch food consumption on PEAK 2.0 by detecting the completed food use through `Action_ReduceUses`, including food exhausted in one use, before the delayed item-removal path. Guest consumption now uses an owner-authenticated request that the host validates against the marked item and its current holder.
+* Hidden Mega Launch food eligibility now follows the item's actual hunger-restoration actions instead of PEAK's incomplete food tags, allowing ordinary items such as Scout Cookies while still excluding mystical and emergency-healing items.
+* Fixed hidden food action resolution for PEAK prefabs whose `ItemActionBase` components live on child objects: consumption now resolves the protected owning-item reference and also observes the semantic hunger-restoration action, with lifecycle diagnostics for marked items.
+* Made hidden Mega Launch food survive pickup: tracking now follows the stable item-instance GUID into the inventory instead of the world `PhotonView` that PEAK destroys during pickup, while the host records and validates the new holder.
+* Decoupled PEAK's global OrbFog from early biome loading in PVP, nobody-wait and team-wait races. The host now advances a synchronized fog origin only after the slowest active racer physically enters the next segment, while lobby waiting retains vanilla behavior.
+
+### 0.9.0
+* Added three synchronized campfire waiting policies for every race mode: wait for nobody, wait for each team independently, or wait for the whole lobby.
+* Added host-authoritative, monotonic player/team/lobby checkpoint progress with Photon late-join and host-migration synchronization.
+* Players without an explicitly selected troop are treated as one-person teams; disconnected players and bots never block a campfire.
+* Disabled next-campfire death respawning when waiting for nobody, including PVP real deaths, and safely migrate incompatible old/configured combinations to previous-campfire respawning.
+* Later teams can logically complete an already-lit campfire. Loaded transitions are blocked locally only for teams that have not completed them, and passed barriers never return for eligible teams.
+* Reworked biome retention to preserve one contiguous route for lagging players, unfinished teams, corpse timers, previous-campfire targets and PVP blowgun returns, then unload genuinely unneeded older segments.
+* Scoped final rising lava/Gloom by waiting policy: per player for nobody, shared per team for team waiting, and vanilla global behavior for lobby waiting. Existing no-reset-on-death behavior is unchanged.
+* A fully wiped team now returns to its own last completed checkpoint while another team remains alive; another team's later fire can no longer pull it forward. A full lobby wipe still ends the run.
+* Rebuilt the host F3 lobby menu into scrollable Progression, Respawn, PVP and Current Rules sections with contextual descriptions, compatibility validation and responsive sizing.
+* Hardened team-change and campfire-completion RPC validation so the master client verifies sender ownership, range, team readiness and sequential checkpoint progress.
+
 ### 0.8.5
 * Moved RaceToThePeak's host lobby and in-run panels to an independent configurable key, defaulting to F3.
 * Removed the Harmony interception and forced closing of PEAK Unlimited's configuration window; PEAK Unlimited retains full ownership of its F2 binding.

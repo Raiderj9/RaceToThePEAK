@@ -50,13 +50,19 @@ public partial class Plugin : BaseUnityPlugin
         DontDestroyOnLoad(systemsObject);
         RaceSettingsManager settingsManager = systemsObject.AddComponent<RaceSettingsManager>();
         settingsManager.Initialize(Config);
+        CampfireAbilityManager abilityManager = systemsObject.AddComponent<CampfireAbilityManager>();
+        abilityManager.Initialize(Config);
+        systemsObject.AddComponent<CampfireProgressionController>();
         systemsObject.AddComponent<PlayerCampfireProgressTracker>();
         systemsObject.AddComponent<RaceRespawnController>();
+        systemsObject.AddComponent<BiomeLifecycleController>();
+        systemsObject.AddComponent<OrbFogProgressionController>();
         systemsObject.AddComponent<PvpBlowgunManager>();
         systemsObject.AddComponent<PvpChestRefreshManager>();
         systemsObject.AddComponent<LocalBiomeEnvironmentController>();
         systemsObject.AddComponent<FinalHazardController>();
         systemsObject.AddComponent<RespawnCountdownUI>();
+        systemsObject.AddComponent<CampfireAbilityHUD>();
 
         settingsMenuObject = new GameObject("RaceToThePeakSettingsUI");
         DontDestroyOnLoad(settingsMenuObject);
@@ -98,6 +104,10 @@ public partial class Plugin : BaseUnityPlugin
         harmony.PatchAll(typeof(CharacterTeamInfo));
         Log.LogInfo("Character Team Handler Successful");
 
+        harmony.PatchAll(typeof(CampfireAbilityState));
+        harmony.PatchAll(typeof(CampfireAbilityPatch));
+        Log.LogInfo("Campfire Ability State Successful");
+
         harmony.PatchAll(typeof(RespawnPatch));
         Log.LogInfo("Respawn Strategies Successful");
 
@@ -126,7 +136,7 @@ public partial class Plugin : BaseUnityPlugin
         Log.LogInfo("Local Biome Environment Patch Applied");
 
         harmony.PatchAll(typeof(FinalHazardPatch));
-        Log.LogInfo("Personal Final Hazard Patch Applied");
+        Log.LogInfo("Scoped Final Hazard Patch Applied");
 
         Log.LogInfo($"Plugin {Name} is loaded!");
     }

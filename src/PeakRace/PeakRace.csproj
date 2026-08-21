@@ -8,7 +8,7 @@
     <!-- This is the display name of your mod. Example: BepInEx Template -->
     <AssemblyTitle>PeakRace</AssemblyTitle>
     <!-- This is the version number of your mod. -->
-    <Version>0.8.5</Version>
+    <Version>0.10.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +19,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\armband" />
     <EmbeddedResource Include="Resources\teamkiosk" />
+    <EmbeddedResource Include="Resources\AbilityIcons\*.png" />
   </ItemGroup>
 
   <!--
